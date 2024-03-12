@@ -11,8 +11,9 @@
         width: 130px;
         position: absolute;
         pointer-events: none;
-        transition: top 1s, left 1s;
+        transition: top 3s, left 3s;
         transition-timing-function: ease-out;
+        
     }
 </style>
 
@@ -23,17 +24,29 @@
     const wizImg = document.querySelector('img')
     let mouseX = 0
     let mouseY = 0
+    var oldx = 0
+    var direction = ""
     window.addEventListener('mousemove', (event) => {
-        mouseY = (event.clientY ) + 'px'
-        mouseX = (event.clientX ) + 'px'
+        mouseY = (event.clientY) + 'px'
+        mouseX = (event.clientX) + 'px'
+        if (event.pageX < oldx) {
+            direction = "left"
+        } else if (event.pageX > oldx) {
+            direction = "right"
+        }
+        oldx = event.pageX
     })
     const cursorMove = () => {
         wizImg.style.top = mouseY
         wizImg.style.left = mouseX
+        if (direction == "left") {
+            wizImg.style.transform = 'scaleX(1)';
+        } else {
+            wizImg.style.transform = 'scaleX(-1)';
+        }
         window.requestAnimationFrame(cursorMove)
     }
     cursorMove()
-
 </script>
 
 </html>
