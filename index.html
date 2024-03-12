@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wizard</title>
+</head>
+<style>
+    img {
+        width: 130px;
+        position: absolute;
+        pointer-events: none;
+        transition: top 1s, left 1s;
+        transition-timing-function: ease-out;
+    }
+</style>
+
+<body>
+    <img src="./images/wiz.gif" />
+</body>
+<script>
+    const wizImg = document.querySelector('img')
+    let mouseX = 0
+    let mouseY = 0
+    window.addEventListener('mousemove', (event) => {
+        mouseY = (event.clientY ) + 'px'
+        mouseX = (event.clientX ) + 'px'
+    })
+    const cursorMove = () => {
+        wizImg.style.top = mouseY
+        wizImg.style.left = mouseX
+        window.requestAnimationFrame(cursorMove)
+    }
+    cursorMove()
+
+</script>
+
+</html>
